@@ -24,3 +24,8 @@
 
 # Build folders
 test/.build/*
+test/.build/*
+/Simbuino/
+
+# Vim swp files
+*.swp
