@@ -4,6 +4,8 @@
 //importe the Gamebuino library
 #include <Gamebuino.h>
 
+#include "rect.h"
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //creates a Gamebuino object named g_gb
 Gamebuino g_gb = Gamebuino();
@@ -17,10 +19,7 @@ Gamebuino g_gb = Gamebuino();
 bool g_firstRun = true;
 
 // Character controls.
-int g_startX = 10;
-int g_startY = 10;
-const short g_width = 1;
-const short g_height = 1;
+Rect g_p1;
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void setup()
@@ -48,6 +47,8 @@ void loop()
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void initalize()
 {
+    g_p1.pos.x = 10;
+    g_p1.pos.y = 10;
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -60,28 +61,13 @@ void update()
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void logic()
 {
-    if (g_gb.buttons.repeat(BTN_UP, 1))
-    {
-        g_startY -= 1;
-    }
-    else if (g_gb.buttons.repeat(BTN_RIGHT, 1))
-    {
-        g_startX += 1;
-    }
-    else if (g_gb.buttons.repeat(BTN_DOWN, 1))
-    {
-        g_startY += 1;
-    }
-    else if (g_gb.buttons.repeat(BTN_LEFT, 1))
-    {
-        g_startX -= 1;
-    }
+    move( g_p1 );
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void draw()
 {
-    g_gb.display.fillRect(g_startX, g_startY, g_width, g_height);
+    draw( g_p1 );
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
