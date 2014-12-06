@@ -20,11 +20,7 @@
 *.app
 *.i*86
 *.x86_64
-*.hex
 
-# Build folders
-test/.build/*
-test/.build/*
 /Simbuino/
 
 # Vim swp files
