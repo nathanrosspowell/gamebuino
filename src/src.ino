@@ -6,6 +6,7 @@
 
 #include "rect.h"
 #include "level.h"
+#include "player.h"
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //creates a Gamebuino object named g_gb
@@ -20,7 +21,7 @@ Gamebuino g_gb = Gamebuino();
 bool g_firstRun = true;
 
 // Character controls.
-Rect g_p1;
+Player g_p1;
 Level g_level;
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
