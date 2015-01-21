@@ -5,6 +5,7 @@
 #include <Gamebuino.h>
 
 #include "rect.h"
+#include "level.h"
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //creates a Gamebuino object named g_gb
@@ -20,6 +21,7 @@ bool g_firstRun = true;
 
 // Character controls.
 Rect g_p1;
+Level g_level;
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void setup()
@@ -68,6 +70,7 @@ void logic()
 void draw()
 {
     draw( g_p1 );
+    draw( g_level );
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
