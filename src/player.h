@@ -11,6 +11,7 @@ public:
     Rect body;
     Rect legs;
     Rect bounds;
+    short jumpForce;
 
     Player() 
         : pos ( 10, 10 )
@@ -18,6 +19,7 @@ public:
         , body(0, 2, 6, 8 )
         , legs( 2, 10, 2, 8 )
         , bounds( 0, 0, 6, 18 )
+        , jumpForce( 0.0f )
     {
     }
 };

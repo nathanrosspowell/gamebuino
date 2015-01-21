@@ -17,6 +17,9 @@ Gamebuino g_gb = Gamebuino();
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Game variables.
 
+// Render.
+const short g_fps = 20;
+
 // State.
 bool g_firstRun = true;
 
@@ -31,6 +34,7 @@ void setup()
   g_gb.pickRandomSeed();
   //g_gb.titleScreen(logo);
   g_gb.battery.show = false;//hide the battery indicator
+  g_gb.setFrameRate( g_fps );
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -64,7 +68,7 @@ void update()
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void logic()
 {
-    move( g_p1 );
+    move( g_p1 );  
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
