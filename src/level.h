@@ -4,12 +4,21 @@
 #include "cloud.h"
 
 #define NUM_CLOUDS 4
+#define NUM_SEPERATORS 4
 
 class Level
 {
 public:
     Cloud clouds[NUM_CLOUDS];
+    short seperators[NUM_SEPERATORS];
 
-    Level() {}
+    Level()
+    {
+        // Seperators
+        for ( short i = 0; i < NUM_SEPERATORS; ++i )
+        {
+            seperators[ i ] = ( 84 / NUM_SEPERATORS ) * i;
+        }
+    }
 };
 #endif // _LEVEL_H_

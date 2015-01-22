@@ -7,10 +7,21 @@ void draw( Rect& rect )
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void draw( Level& level )
 {
+    const short floorStart = 42;
+    const short floorWidth = 4;
     // Floor.
-    g_gb.display.drawFastHLine(0, 46, 84 );
-    g_gb.display.drawFastHLine(0, 42, 84 );
-    // 'Clouds'
+    g_gb.display.drawFastHLine(0, floorStart, 84 );
+    g_gb.display.drawFastHLine(0, floorStart + floorWidth, 84 );
+    // Foor seperators.
+    for ( short i = 0; i < NUM_SEPERATORS; ++i )
+    {
+        short seperator = level.seperators[i];
+        for ( short p = 1; p < floorWidth; ++p )
+        {
+            g_gb.display.drawPixel( seperator + p, floorStart + p );
+        }
+    }
+    // Clouds.
     for ( short i = 0; i < NUM_CLOUDS; ++i )
     {
         Cloud& cloud = level.clouds[i];
@@ -19,8 +30,6 @@ void draw( Level& level )
             g_gb.display.drawCircle( cloud.pos.x, cloud.pos.y, cloud.size );
         }
     }
-
-       
 }
 
 

@@ -34,6 +34,7 @@ void move( Player& p1 )
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void move( Level& level )
 {
+    // Clouds.
     for ( short i = 0; i < NUM_CLOUDS; ++i )
     {
         Cloud& cloud = level.clouds[i];
@@ -57,4 +58,18 @@ void move( Level& level )
             cloud.pos.x -= 1;
         }
     }
+    // Seperators
+    for ( short i = 0; i < NUM_SEPERATORS; ++i )
+    {
+        short& seperator = level.seperators[ i ];
+        if ( seperator > 0 )
+        {
+            seperator -= 1;
+        }
+        else
+        {
+            seperator = 84;
+        }
+    }
+
 }
