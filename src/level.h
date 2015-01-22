@@ -1,12 +1,15 @@
 #ifndef _LEVEL_H_
 #define _LEVEL_H_
+
+#include "cloud.h"
+
+#define NUM_CLOUDS 4
+
 class Level
 {
 public:
-    short x;
-    short y;
+    Cloud clouds[NUM_CLOUDS];
 
-    Level() : x(0), y(0) {}
-    Level(short x, short y): x(x), y(y) {}
+    Level() {}
 };
 #endif // _LEVEL_H_
