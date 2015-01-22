@@ -55,7 +55,14 @@ void move( Level& level )
         }
         else 
         {
-            cloud.pos.x -= 1;
+            if ( i % 2 == 0 )
+            {
+                cloud.pos.x -= 2;
+            }
+            else
+            {
+                cloud.pos.x -= 1;
+            }
         }
     }
     // Seperators
@@ -64,7 +71,7 @@ void move( Level& level )
         short& seperator = level.seperators[ i ];
         if ( seperator > 0 )
         {
-            seperator -= 1;
+            seperator -= 2;
         }
         else
         {
