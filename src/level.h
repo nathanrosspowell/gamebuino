@@ -11,8 +11,9 @@ class Level
 public:
     Cloud clouds[NUM_CLOUDS];
     short seperators[NUM_SEPERATORS];
+    short introDisplay;
 
-    Level()
+    Level() : introDisplay( 20 )
     {
         // Seperators
         for ( short i = 0; i < NUM_SEPERATORS; ++i )

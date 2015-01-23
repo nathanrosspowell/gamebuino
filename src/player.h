@@ -12,14 +12,16 @@ public:
     Rect legs;
     Rect bounds;
     short jumpForce;
+    bool startLevel;
 
     Player() 
-        : pos ( 10, 10 )
+        : pos ()
         , head( 2, 0, 2, 2 )
         , body(0, 2, 6, 8 )
         , legs( 2, 10, 2, 8 )
         , bounds( 0, 0, 6, 18 )
         , jumpForce( 0.0f )
+        , startLevel( false )
     {
     }
 };

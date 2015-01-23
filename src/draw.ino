@@ -30,15 +30,23 @@ void draw( Level& level )
             g_gb.display.drawCircle( cloud.pos.x, cloud.pos.y, cloud.size );
         }
     }
+    // Intro.
+    if ( g_p1.startLevel && level.introDisplay > 0 )
+    {
+        g_gb.display.cursorX = 5;
+        g_gb.display.cursorY = 5;
+        g_gb.display.print(F("GO!"));
+        level.introDisplay -= 1;
+    }
 }
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void draw( Player& player )
+void draw( Player& p1 )
 {
-    Rect head = player.head + player.pos;
-    Rect body = player.body + player.pos;
-    Rect legs = player.legs + player.pos;
+    Rect head = p1.head + p1.pos;
+    Rect body = p1.body + p1.pos;
+    Rect legs = p1.legs + p1.pos;
     draw( head );
     draw( body );
     draw( legs );
