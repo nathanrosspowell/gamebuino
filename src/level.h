@@ -2,21 +2,44 @@
 #define _LEVEL_H_
 
 #include "cloud.h"
+#include "level_object.h"
 
 #define NUM_CLOUDS 4
 #define NUM_SEPERATORS 4
+#define MIN_LEVEL_OBJECTS 10
+#define MAX_LEVEL_OBJECTS 64
 
 class Level
 {
 public:
+    LevelObject levelObjects[MAX_LEVEL_OBJECTS];
     Cloud clouds[NUM_CLOUDS];
     short seperators[NUM_SEPERATORS];
     short seperatorSpeed;
     short introDisplay;
+    short numObjects;
 
     Level() 
         : seperatorSpeed( 2 )
         , introDisplay( 20 )
+        , numObjects( 0 )
+    {
+        setupSeperators();
+        setupClouds();
+        setupObjects();
+    }
+
+private:
+    void setupSeperators()
+    {
+        // Seperators are evenly spaced.
+        for ( short i = 0; i < NUM_SEPERATORS; ++i )
+        {
+            seperators[ i ] = ( 84 / NUM_SEPERATORS ) * i;
+        }
+    }
+
+    void setupClouds()
     {
         // Shuffle indicies.
         short randoms[ NUM_CLOUDS ];
@@ -39,14 +62,20 @@ public:
             cloud.size = 3 + ( 2 * randoms[ i ] );
             cloud.pos.x = ( 84 / NUM_SEPERATORS ) * cloud.size;
             cloud.pos.y = cloud.size + ( i * 3 );
-            cloud.speed = 1 + ( randoms[ i ] % 2 );
+            cloud.speed = 1 + ( randoms[ i ] % 3 );
+        }
+    }
 
-        }
-        // Seperators are evenly spaced.
-        for ( short i = 0; i < NUM_SEPERATORS; ++i )
+    void setupObjects()
+    {
+        numObjects = random( MIN_LEVEL_OBJECTS, MAX_LEVEL_OBJECTS );
+        for ( short i = 0; i < numObjects; ++i )
         {
-            seperators[ i ] = ( 84 / NUM_SEPERATORS ) * i;
+            short offset = random(0, 10 );
+            LevelObjectType::Enum type = (LevelObjectType::Enum)random(0, LevelObjectType::MAX);
+            levelObjects[ i ] = LevelObject( offset, type );
         }
+
     }
 };
 #endif // _LEVEL_H_
