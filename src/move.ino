@@ -51,31 +51,14 @@ void moveClouds( Level& level )
     for ( short i = 0; i < NUM_CLOUDS; ++i )
     {
         Cloud& cloud = level.clouds[i];
-        if ( cloud.size == 0 )
+        // Reset to the right
+        if ( cloud.pos.x < ( 0 - cloud.size ) )
         {
-            cloud.size = 3 + ( i * 2 );// randomise later
             cloud.pos.x = 84 + cloud.size;
-            cloud.pos.y = cloud.size + ( i * 5 );
-            cloud.delay = i * NUM_CLOUDS * 5;
-        }
-        else if ( cloud.pos.x < ( 0 - cloud.size ) )
-        {
-            cloud.size = 0;
-        }
-        else if ( cloud.delay > 0 )
-        {
-            cloud.delay -= 1;
         }
         else 
         {
-            if ( i % 2 == 0 )
-            {
-                cloud.pos.x -= 2;
-            }
-            else
-            {
-                cloud.pos.x -= 1;
-            }
+            cloud.pos.x -= cloud.speed;
         }
     }
 }
@@ -88,7 +71,7 @@ void moveSeperators( Level& level )
         short& seperator = level.seperators[ i ];
         if ( seperator > 0 )
         {
-            seperator -= 2;
+            seperator -= level.seperatorSpeed;
         }
         else
         {

@@ -8,8 +8,8 @@ class Cloud
 public:
     Position pos;
     short size;
-    short delay;
+    short speed;
 
-    Cloud() : pos(), size( 0 ), delay( 0 ) {} 
+    Cloud() : pos(), size( 0 ), speed( 0 ) {} 
 };
 #endif // _CLOUD_H_

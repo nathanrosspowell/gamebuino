@@ -31,10 +31,10 @@ Level g_level;
 void setup()
 {
   g_gb.begin();
-  g_gb.pickRandomSeed();
   //g_gb.titleScreen(logo);
   g_gb.battery.show = false;//hide the battery indicator
   g_gb.setFrameRate( g_fps );
+  randomSeed(0);
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -56,6 +56,9 @@ void initalize()
 {
     g_p1.pos.x = -10;
     g_p1.pos.y = 45;
+
+    // Reset the level after the seed has been set
+    g_level = Level();
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
