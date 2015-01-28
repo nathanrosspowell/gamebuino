@@ -3,11 +3,6 @@
 
 #include "cloud.h"
 
-#define NUM_CLOUDS 4
-#define NUM_SEPERATORS 4
-#define MIN_LEVEL_OBJECTS 10
-#define MAX_LEVEL_OBJECTS 64
-
 struct LevelObjectType
 {
     enum Enum
@@ -29,8 +24,8 @@ public:
     LevelObjectType::Enum type;
     
     LevelObject() : offset( 0 ), type( LevelObjectType::MAX ) {}
-    LevelObject( short offset, LevelObjectType::Enum type )
-        : offset( offset )
+    LevelObject( int off, LevelObjectType::Enum type )
+        : offset( off )
         , type( type )
     {
     }

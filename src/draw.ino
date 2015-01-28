@@ -7,6 +7,8 @@ void draw( Rect& rect )
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void draw( Level& level )
 {
+    g_gb.display.print(F("Frame:"));
+    g_gb.display.print(level.frameProgress);
     const short floorStart = 42;
     const short floorWidth = 4;
     // Floor.
@@ -41,7 +43,7 @@ void draw( Level& level )
     else if ( level.introDisplay < 1 )
     {
         // Draw objects
-        int x = level.frameProgress;
+        int f = level.frameProgress;
         for ( short i = 0; i < level.numObjects; ++i )
         {
             LevelObject& obj = level.levelObjects[ i ];
@@ -54,7 +56,20 @@ void draw( Level& level )
             case LevelObjectType::Jumpable: c = 'j'; break;
             case LevelObjectType::Kickable: c = 'k'; break;
             }
-            g_gb.display.drawChar( obj.offset - x, floorStart - 9, c, 2 ); 
+            int x = obj.offset - f;
+            if ( x > -10 && x < 95 )
+            {
+                g_gb.display.cursorX = x;
+                g_gb.display.cursorY = 15;
+                g_gb.display.print(i);
+                g_gb.display.cursorX = x;
+                g_gb.display.cursorY = 22;
+                g_gb.display.print(obj.offset);
+                g_gb.display.cursorX = x;
+                g_gb.display.cursorY = 38;
+                g_gb.display.print(c);
+            }
+            //g_gb.display.drawChar( obj.offset - x, floorStart - 9, c, 1 ); 
         }
 
     }

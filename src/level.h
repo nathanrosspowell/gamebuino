@@ -6,8 +6,8 @@
 
 #define NUM_CLOUDS 4
 #define NUM_SEPERATORS 4
-#define MIN_LEVEL_OBJECTS 10
-#define MAX_LEVEL_OBJECTS 64
+#define MIN_LEVEL_OBJECTS 7 
+#define MAX_LEVEL_OBJECTS 9
 
 class Level
 {
@@ -21,7 +21,7 @@ public:
     int frameProgress;
 
     Level() 
-        : speed( 2 )
+        : speed( 1 )
         , introDisplay( 20 )
         , numObjects( 0 )
         , frameProgress( 0 )
@@ -70,13 +70,13 @@ private:
 
     void setupObjects()
     {
-        short offset = 84;
+        int offset = 84;
         numObjects = random( MIN_LEVEL_OBJECTS, MAX_LEVEL_OBJECTS );
         for ( short i = 0; i < numObjects; ++i )
         {
-            offset += random( 3, 15 ) * 30 ;
-            LevelObjectType::Enum type = (LevelObjectType::Enum)random(0, LevelObjectType::MAX);
-            levelObjects[ i ] = LevelObject( offset, type );
+            offset = offset + random( 5, 15 ) * 5;
+            int type = random(0, LevelObjectType::MAX);
+            levelObjects[ i ] = LevelObject( offset, (LevelObjectType::Enum)type );
         }
 
     }
