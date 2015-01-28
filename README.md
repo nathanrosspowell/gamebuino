@@ -1,7 +1,7 @@
 gamebuino-runner
 ================
 
-Gamebuino Runner is a de-make/homage of the game [BIT.TRIP.RUNNER][bittriprunner] by [Choice Provisions][choice] (fromally Gaijin Games).
+Gamebuino Runner is a de-make/homage of the game [BIT.TRIP.RUNNER][bittriprunner] by [Choice Provisions][choice] (formally Gaijin Games).
 
 The code runs on the [GameBuino][gb], which is an [aduino][ad] based hand held gaming console.
 
