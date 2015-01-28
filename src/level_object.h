@@ -25,7 +25,7 @@ struct LevelObjectType
 class LevelObject
 {
 public:
-    short offset;
+    int offset;
     LevelObjectType::Enum type;
     
     LevelObject() : offset( 0 ), type( LevelObjectType::MAX ) {}

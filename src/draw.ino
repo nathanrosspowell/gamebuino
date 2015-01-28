@@ -38,6 +38,27 @@ void draw( Level& level )
         g_gb.display.print(F("GO!"));
         level.introDisplay -= 1;
     }
+    else if ( level.introDisplay < 1 )
+    {
+        // Draw objects
+        int x = level.frameProgress;
+        for ( short i = 0; i < level.numObjects; ++i )
+        {
+            LevelObject& obj = level.levelObjects[ i ];
+            char c = ' ';
+            switch( obj.type )
+            {
+            case LevelObjectType::Gap: c = 'g'; break;
+            case LevelObjectType::StepUp: c = 'u'; break;
+            case LevelObjectType::StepDown: c = 'd'; break;
+            case LevelObjectType::Jumpable: c = 'j'; break;
+            case LevelObjectType::Kickable: c = 'k'; break;
+            }
+            g_gb.display.drawChar( obj.offset - x, floorStart - 9, c, 2 ); 
+        }
+
+    }
+
 }
 
 

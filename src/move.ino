@@ -71,12 +71,13 @@ void moveSeperators( Level& level )
         short& seperator = level.seperators[ i ];
         if ( seperator > 0 )
         {
-            seperator -= level.seperatorSpeed;
+            seperator -= level.speed;
         }
         else
         {
             seperator = 84;
         }
     }
+    level.frameProgress += level.speed;
 
 }

@@ -15,14 +15,16 @@ public:
     LevelObject levelObjects[MAX_LEVEL_OBJECTS];
     Cloud clouds[NUM_CLOUDS];
     short seperators[NUM_SEPERATORS];
-    short seperatorSpeed;
+    short speed;
     short introDisplay;
     short numObjects;
+    int frameProgress;
 
     Level() 
-        : seperatorSpeed( 2 )
+        : speed( 2 )
         , introDisplay( 20 )
         , numObjects( 0 )
+        , frameProgress( 0 )
     {
         setupSeperators();
         setupClouds();
@@ -68,10 +70,11 @@ private:
 
     void setupObjects()
     {
+        short offset = 84;
         numObjects = random( MIN_LEVEL_OBJECTS, MAX_LEVEL_OBJECTS );
         for ( short i = 0; i < numObjects; ++i )
         {
-            short offset = random(0, 10 );
+            offset += random( 3, 15 ) * 30 ;
             LevelObjectType::Enum type = (LevelObjectType::Enum)random(0, LevelObjectType::MAX);
             levelObjects[ i ] = LevelObject( offset, type );
         }
