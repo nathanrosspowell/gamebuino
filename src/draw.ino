@@ -1,12 +1,10 @@
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void draw( Rect& rect )
-{
+void draw( Rect& rect ) {
     g_gb.display.fillRect(rect.pos.x, rect.pos.y, rect.size.x, rect.size.y );
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void draw( Level& level )
-{
+void draw( Level& level ) {
     g_gb.display.print(F("Frame:"));
     g_gb.display.print(level.frameProgress);
     const short floorStart = 42;
@@ -43,22 +41,23 @@ void draw( Level& level )
     else if ( level.introDisplay < 1 )
     {
         // Draw objects
+        bool passedAllObjects = true;
         int f = level.frameProgress;
-        for ( short i = 0; i < level.numObjects; ++i )
-        {
+        for ( short i = 0; i < level.numObjects; ++i ) {
             LevelObject& obj = level.levelObjects[ i ];
+            draw( obj, f );
             char c = ' ';
             switch( obj.type )
             {
             case LevelObjectType::Gap: c = 'g'; break;
             case LevelObjectType::StepUp: c = 'u'; break;
             case LevelObjectType::StepDown: c = 'd'; break;
-            case LevelObjectType::Jumpable: c = 'j'; break;
+            case LevelObjectType::Jumpable: c = 'j'; continue;
             case LevelObjectType::Kickable: c = 'k'; break;
             }
             int x = obj.offset - f;
-            if ( x > -10 && x < 95 )
-            {
+            if ( x > -10 && x < 95 ) {
+                passedAllObjects = false;
                 g_gb.display.cursorX = x;
                 g_gb.display.cursorY = 15;
                 g_gb.display.print(i);
@@ -69,22 +68,42 @@ void draw( Level& level )
                 g_gb.display.cursorY = 38;
                 g_gb.display.print(c);
             }
-            //g_gb.display.drawChar( obj.offset - x, floorStart - 9, c, 1 ); 
+        }
+        if ( passedAllObjects ) {
+            g_gb.display.cursorX = 15;
+            g_gb.display.cursorY = 15;
+            g_gb.display.print("CONGRATS!!");
         }
 
     }
 
 }
 
-
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void draw( Player& p1 )
-{
+void draw( Player& p1 ) {
     Rect head = p1.head + p1.pos;
     Rect body = p1.body + p1.pos;
     Rect legs = p1.legs + p1.pos;
     draw( head );
     draw( body );
     draw( legs );
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+void draw( LevelObject& obj, int f ){
+    int x = obj.offset - f;
+    if ( x > -10 && x < 95 )
+    {
+        switch ( obj.type ) {
+            case  LevelObjectType::Gap: break;
+            case  LevelObjectType::StepUp: break;
+            case  LevelObjectType::StepDown: break;
+            case  LevelObjectType::Jumpable: { 
+                    g_gb.display.fillRect(x, 38, 8, 8);
+                }
+                break;
+            case  LevelObjectType::Kickable: break;
+        }
+    }
 }
 
