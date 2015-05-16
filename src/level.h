@@ -6,8 +6,8 @@
 
 #define NUM_CLOUDS 4
 #define NUM_SEPERATORS 4
-#define MIN_LEVEL_OBJECTS 7 
-#define MAX_LEVEL_OBJECTS 9
+#define MIN_LEVEL_OBJECTS 3 
+#define MAX_LEVEL_OBJECTS 5
 
 class Level
 {

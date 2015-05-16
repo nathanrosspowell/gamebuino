@@ -9,6 +9,40 @@ void draw( Level& level ) {
     g_gb.display.print(level.frameProgress);
     const short floorStart = 42;
     const short floorWidth = 4;
+    // Level Debug
+    const bool debug = true;
+    if ( debug ) {
+        for ( short i = 0; i < level.numObjects; ++i ) {
+            LevelObject& obj = level.levelObjects[ i ];
+            char c = ' ';
+            switch( obj.type )
+            {
+            case LevelObjectType::Gap: c = 'g'; break;
+            case LevelObjectType::StepUp: c = 'u'; break;
+            case LevelObjectType::StepDown: c = 'd'; break;
+            case LevelObjectType::Jumpable: c = 'j'; break;
+            case LevelObjectType::Kickable: c = 'k'; break;
+            }
+            {
+                g_gb.display.cursorX = 39; 
+                g_gb.display.cursorY = 6 * i;
+                g_gb.display.print("i");
+                g_gb.display.print(i);
+            }
+            {
+                g_gb.display.cursorX = 49;
+                g_gb.display.cursorY = 6 * i;
+                g_gb.display.print("o");
+                g_gb.display.print(obj.offset);
+            }
+            {
+                g_gb.display.cursorX = 66;
+                g_gb.display.cursorY = 6 * i;
+                g_gb.display.print(c);
+            }
+        }
+
+    }
     // Floor.
     g_gb.display.drawFastHLine(0, floorStart, 84 );
     g_gb.display.drawFastHLine(0, floorStart + floorWidth, 84 );
@@ -52,7 +86,7 @@ void draw( Level& level ) {
             case LevelObjectType::Gap: c = 'g'; break;
             case LevelObjectType::StepUp: c = 'u'; break;
             case LevelObjectType::StepDown: c = 'd'; break;
-            case LevelObjectType::Jumpable: c = 'j'; continue;
+            case LevelObjectType::Jumpable: c = 'j'; break;
             case LevelObjectType::Kickable: c = 'k'; break;
             }
             int x = obj.offset - f;
@@ -69,7 +103,7 @@ void draw( Level& level ) {
                 g_gb.display.print(c);
             }
         }
-        if ( passedAllObjects ) {
+        if ( f > 200 && passedAllObjects ) {
             g_gb.display.cursorX = 15;
             g_gb.display.cursorY = 15;
             g_gb.display.print("CONGRATS!!");
