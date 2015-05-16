@@ -5,24 +5,15 @@ void draw( Rect& rect ) {
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void draw( Level& level ) {
-    g_gb.display.print(F("Frame:"));
-    g_gb.display.print(level.frameProgress);
+    const bool debug = false;
     const short floorStart = 42;
     const short floorWidth = 4;
+    g_gb.display.print(F("Frame:"));
+    g_gb.display.print(level.frameProgress);
     // Level Debug
-    const bool debug = true;
     if ( debug ) {
         for ( short i = 0; i < level.numObjects; ++i ) {
             LevelObject& obj = level.levelObjects[ i ];
-            char c = ' ';
-            switch( obj.type )
-            {
-            case LevelObjectType::Gap: c = 'g'; break;
-            case LevelObjectType::StepUp: c = 'u'; break;
-            case LevelObjectType::StepDown: c = 'd'; break;
-            case LevelObjectType::Jumpable: c = 'j'; break;
-            case LevelObjectType::Kickable: c = 'k'; break;
-            }
             {
                 g_gb.display.cursorX = 39; 
                 g_gb.display.cursorY = 6 * i;
@@ -38,7 +29,7 @@ void draw( Level& level ) {
             {
                 g_gb.display.cursorX = 66;
                 g_gb.display.cursorY = 6 * i;
-                g_gb.display.print(c);
+                g_gb.display.print(obj.GetIcon());
             }
         }
 
@@ -80,27 +71,17 @@ void draw( Level& level ) {
         for ( short i = 0; i < level.numObjects; ++i ) {
             LevelObject& obj = level.levelObjects[ i ];
             draw( obj, f );
-            char c = ' ';
-            switch( obj.type )
-            {
-            case LevelObjectType::Gap: c = 'g'; break;
-            case LevelObjectType::StepUp: c = 'u'; break;
-            case LevelObjectType::StepDown: c = 'd'; break;
-            case LevelObjectType::Jumpable: c = 'j'; break;
-            case LevelObjectType::Kickable: c = 'k'; break;
-            }
             int x = obj.offset - f;
             if ( x > -10 && x < 95 ) {
                 passedAllObjects = false;
-                g_gb.display.cursorX = x;
-                g_gb.display.cursorY = 15;
-                g_gb.display.print(i);
-                g_gb.display.cursorX = x;
-                g_gb.display.cursorY = 22;
-                g_gb.display.print(obj.offset);
-                g_gb.display.cursorX = x;
-                g_gb.display.cursorY = 38;
-                g_gb.display.print(c);
+                if ( debug ) {
+                    g_gb.display.cursorX = x;
+                    g_gb.display.cursorY = 15;
+                    g_gb.display.print(i);
+                    g_gb.display.cursorX = x;
+                    g_gb.display.cursorY = 22;
+                    g_gb.display.print(obj.offset);
+                }
             }
         }
         if ( f > 200 && passedAllObjects ) {
@@ -129,14 +110,19 @@ void draw( LevelObject& obj, int f ){
     if ( x > -10 && x < 95 )
     {
         switch ( obj.type ) {
-            case  LevelObjectType::Gap: break;
-            case  LevelObjectType::StepUp: break;
-            case  LevelObjectType::StepDown: break;
+            //case  LevelObjectType::Gap: break;
+            //case  LevelObjectType::StepUp: break;
+            //case  LevelObjectType::StepDown: break;
             case  LevelObjectType::Jumpable: { 
-                    g_gb.display.fillRect(x, 38, 8, 8);
+                    g_gb.display.fillRect(x, 36, 8, 8);
                 }
                 break;
-            case  LevelObjectType::Kickable: break;
+            //case  LevelObjectType::Kickable: break;
+            default:
+                g_gb.display.cursorX = x;
+                g_gb.display.cursorY = 39;
+                g_gb.display.print(obj.GetIcon());
+                break;
         }
     }
 }

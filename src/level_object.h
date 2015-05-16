@@ -29,5 +29,17 @@ public:
         , type( type )
     {
     }
+
+    char GetIcon() {
+        char c = ' ';
+        switch( type ) {
+            case LevelObjectType::Gap: c = 'g'; break;
+            case LevelObjectType::StepUp: c = 'u'; break;
+            case LevelObjectType::StepDown: c = 'd'; break;
+            case LevelObjectType::Jumpable: c = 'j'; break;
+            case LevelObjectType::Kickable: c = 'k'; break;
+        }
+        return c;
+    }
 };
 #endif // _LEVEL_OBJECT_H_
