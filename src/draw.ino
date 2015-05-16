@@ -5,13 +5,13 @@ void draw( Rect& rect ) {
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void draw( Level& level ) {
-    const bool debug = false;
+    const bool debug = true;
     const short floorStart = 42;
     const short floorWidth = 4;
-    g_gb.display.print(F("Frame:"));
-    g_gb.display.print(level.frameProgress);
     // Level Debug
     if ( debug ) {
+        g_gb.display.print(F("Frame:"));
+        g_gb.display.print(level.frameProgress);
         for ( short i = 0; i < level.numObjects; ++i ) {
             LevelObject& obj = level.levelObjects[ i ];
             {
